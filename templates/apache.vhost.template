@@ -1,0 +1,106 @@
+<VirtualHost *:80>
+    ServerAdmin bo@bo.com
+
+    ServerName ph_MYROOTDOMAIN
+    ServerAlias www.ph_MYROOTDOMAIN
+    DocumentRoot ph_MYSITEPATH
+
+    ErrorLog ph_APACHE_LOG_DIR/ph_MYROOTDOMAIN_error.log
+    CustomLog ph_APACHE_LOG_DIR/ph_MYROOTDOMAIN_access.log combined
+
+    DirectoryIndex index.html index.htm
+
+    ### SSL Redirect
+    #Redirect permanent / https://domainname/
+
+    AddType image/svg+xml svg svgz
+    AddEncoding gzip svgz
+
+    <Directory ph_MYSITEPATH>
+        Options -Indexes +IncludesNOEXEC +SymLinksIfOwnerMatch
+        AllowOverride All Options=ExecCGI,Includes,IncludesNOEXEC,MultiViews,SymLinksIfOwnerMatch
+        
+        <LimitExcept GET POST HEAD>
+                Require all denied
+        </LimitExcept>
+        Require all granted
+
+        RemoveHandler .php
+        RemoveHandler .php5
+        RemoveHandler .php7.0
+        RemoveHandler .php7.1
+        RemoveHandler .php7.2
+        RemoveHandler .php7.3
+        RemoveHandler .php7.4
+    </Directory>
+    
+    ### ERDDAP ###
+    ProxyRequests Off
+    <Location ph_PROXY_Location>
+        ProxyPreserveHost On
+        ProxyPass ph_PROXY_URL_ProxyPass
+        ProxyPassReverse ph_PROXY_URL_ProxyPassReverse        
+    </Location>
+    ProxyTimeout 3600
+    ### ###
+		
+	### SECURITY - BEGIN ###
+    TraceEnable off
+    FileETag None
+    Header edit Set-Cookie ^(.*);\s?Secure;?\s?(.*);\s?Secure;?\s?(.*)$ "$1; $2; $3; Secure"
+    Header edit Set-Cookie ^(.*);\s?HttpOnly;?\s?(.*);\s?HttpOnly;?\s?(.*)$ "$1; $2; $3; HttpOnly"
+    Header always append X-Frame-Options SAMEORIGIN
+    Header set X-XSS-Protection "1; mode=block"
+    Header always unset "X-Powered-By"
+    Header unset "X-Powered-By"
+    
+    <Location /wp-content/cache>
+        <IfModule mod_proxy.c>
+                        ProxyPass !
+        </IfModule>
+        SetHandler none
+        AddType text/plain php php3 php4 php5 php7 phps phtml phptml
+    </Location>
+
+    <Files wp-config.php>
+        # Apache 2.4
+        Require all denied
+    </Files>
+    <Files xmlrpc.php>
+        # Apache 2.4
+        Require all denied
+    </Files>
+    <Files ~ "^.*\.([Hh][Tt][Aa])">
+        # Apache 2.4
+        Require all denied
+    </Files>
+
+    <Files ".user.ini">
+        <IfModule mod_authz_core.c>
+                Require all denied
+        </IfModule>
+        <IfModule !mod_authz_core.c>
+                Order allow,deny
+                Deny from all
+                Satisfy All
+        </IfModule>
+    </Files>
+	### SECURITY - END ###
+    ### SSL ###
+    #SSLEngine On
+    #SSLCertificateFile      ph_FRONTEND_SSL_CERTWITHCA
+    #SSLCertificateKeyFile   ph_FRONTEND_SSL_KEY
+    #SSLCipherSuite HIGH:!aNULL:!MD5
+    #SSLHonorCipherOrder on
+    #SSLCompression off
+    #SSLSessionTickets off
+    #SSLProtocol -ALL +TLSv1.2
+		
+	RemoveHandler .php
+	RemoveHandler .php5
+	RemoveHandler .php7.0
+	RemoveHandler .php7.1
+	RemoveHandler .php7.2
+	RemoveHandler .php7.3
+	RemoveHandler .php7.4
+</VirtualHost>

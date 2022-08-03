@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+    # ERDDAP container
+    erddap:
+        image: axiom/docker-erddap:2.18
+        ports:
+            - "ph_HOST_ERDDAP_PORT:8080"
+        env_file:
+            - "ph_HOST_ERDDAP_ENVIRONMENT_FILE"
+        volumes:
+            # ERDDAP data volume (bigParentDirectory) - logs, cache, ecc...
+            - type: bind
+              source: ph_MYDOCKER_ERDDAP_DATA
+              target: /erddapData
+            # ERDDAP configuration volume
+            - type: bind
+              source: ph_MYDOCKER_ERDDAP_CONTENT
+              target: /usr/local/tomcat/content/erddap
+            # ERDDAP custom data volume - Data that will be ingested by ERDDAP
+            - type: bind
+              source: ph_MYDOCKER_DATA_DIR
+              target: /Data
+            # ERDDAP custom entrypoint - Because we add some commands to the entrypoint file
+            - type: bind
+              source: ph_HOST_ERDDAP_ENTRYPOINT
+              target: /entrypoint.sh
+        restart: unless-stopped
