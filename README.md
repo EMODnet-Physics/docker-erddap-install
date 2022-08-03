@@ -22,8 +22,7 @@ WARNING: This script doesn't do any check of the variables content. So be carefu
 
 ## HOW TO USE
 1. Login as *root* user.
-2. Copy al the content from this repository in any folder of the host. For example `/root/deploy`. 
-Download link: https://bitbucket.org/ettnewmedia/nautilos-docker/get/90445fe16a66.zip
+2. Copy al the content from this repository in any folder of the host. For example `/root/deploy`
 3. Enter in the directory with the `docker-EnvCreation.sh` file.
 4. Customize the configuration in the `docker-EnvCreationVariable.sh` file. The minimal changes you have to do are:
     1. `ERDDAP_user`
