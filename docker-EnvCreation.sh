@@ -64,9 +64,9 @@ echo Load ERDDAP container default content...
 # Extract default ERDDAP Content folder (orgin: https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#initialSetup - https://github.com/BobSimons/erddap/releases/download/v2.12/erddapContent.zip)
 
 if [ $ERDDAP_UseEmptyDataset -eq 1 ]; then
-    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v218.empyDataset.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
+    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v221.empyDataset.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
 else
-    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v218.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
+    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v221.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
 fi   
 chown -R usrtomcat:usrtomcat ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent/*
 # Set ERDDAP docker environment variable
