@@ -87,6 +87,7 @@ RUN apt-get update && \
         maven \
         unzip \
     && if ! command -v gosu &> /dev/null; then apt-get install -y gosu; fi \
+    apt-get clean && \
     && rm -rf /var/lib/apt/lists/*
 
 ARG BUST_CACHE=1
