@@ -128,6 +128,10 @@ sed -i "s@ph_MYDOCKER_ERDDAP_DATA@${MYDOCKER_ROOT_DIR}/customdocker/customvolume
 sed -i "s@ph_MYDOCKER_ERDDAP_CONTENT@${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent@g" ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/docker-compose.yaml
 sed -i "s@ph_MYDOCKER_DATA_DIR@${MYDOCKER_DATA_DIR}@g" ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/docker-compose.yaml
 sed -i "s@ph_HOST_ERDDAP_ENTRYPOINT@${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/entrypoints/erddap_entrypoint.sh@g" ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/docker-compose.yaml
+
+cp ${DEPLOYROOTSCRIPT}/Dockerfile ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/Dockerfile
+cp -R ${DEPLOYROOTSCRIPT}/TOMCAT ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/
+cp -R ${DEPLOYROOTSCRIPT}/ERDDAP ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/
 ### ###
 
 ### Set Entrypoint ###
