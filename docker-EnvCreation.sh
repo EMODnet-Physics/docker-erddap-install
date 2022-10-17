@@ -64,9 +64,9 @@ echo Load ERDDAP container default content...
 # Extract default ERDDAP Content folder (orgin: https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#initialSetup - https://github.com/BobSimons/erddap/releases/download/v2.12/erddapContent.zip)
 
 if [ $ERDDAP_UseEmptyDataset -eq 1 ]; then
-    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v218.empyDataset.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
+    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v221.empyDataset.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
 else
-    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v218.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
+    tar xzf ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/data/erddap/content.erddap_v221.tar.gz -C ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent
 fi   
 chown -R usrtomcat:usrtomcat ${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent/*
 # Set ERDDAP docker environment variable
@@ -128,6 +128,10 @@ sed -i "s@ph_MYDOCKER_ERDDAP_DATA@${MYDOCKER_ROOT_DIR}/customdocker/customvolume
 sed -i "s@ph_MYDOCKER_ERDDAP_CONTENT@${MYDOCKER_ROOT_DIR}/customdocker/customvolumes/erddapContent@g" ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/docker-compose.yaml
 sed -i "s@ph_MYDOCKER_DATA_DIR@${MYDOCKER_DATA_DIR}@g" ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/docker-compose.yaml
 sed -i "s@ph_HOST_ERDDAP_ENTRYPOINT@${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/entrypoints/erddap_entrypoint.sh@g" ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/docker-compose.yaml
+
+cp ${DEPLOYROOTSCRIPT}/Dockerfile ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/Dockerfile
+cp -R ${DEPLOYROOTSCRIPT}/TOMCAT ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/
+cp -R ${DEPLOYROOTSCRIPT}/ERDDAP ${MYDOCKER_ROOT_DIR}/customdocker/deployfiles/erddap-docker/
 ### ###
 
 ### Set Entrypoint ###
