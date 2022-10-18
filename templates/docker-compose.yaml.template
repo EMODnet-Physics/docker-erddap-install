@@ -2,7 +2,6 @@ version: '3.3'
 services:
     # ERDDAP container
     erddap:
-        #image: axiom/docker-erddap:2.18
         build: .
         ports:
             - "ph_HOST_ERDDAP_PORT:8080"
