@@ -12,11 +12,15 @@ source ${DEPLOYROOTSCRIPT}/docker-EnvCreationVariable.sh
 echo DONE!
 
 ### Apache ###
-# Import Apache setup
-source ${DEPLOYROOTSCRIPT}/docker-ApacheSetup.sh
-# Set default index.html
-echo "This is a default index" > $APACHE_SITE_PATH/index.html
-### ###
+read -r -p "Do you wish to configure APACHE? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
+then
+    # Import Apache setup
+    source ${DEPLOYROOTSCRIPT}/docker-ApacheSetup.sh
+    # Set default index.html
+    echo "This is a default index" > $APACHE_SITE_PATH/index.html
+    ### ###
+fi
 
 ### Create linux users ###
 echo -n create linux users...
