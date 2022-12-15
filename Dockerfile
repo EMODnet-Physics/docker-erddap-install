@@ -74,7 +74,7 @@ CMD ["start-tomcat.sh"]
 FROM customtomcat
 LABEL maintainer="Marco Alba <marco.alba@ettsolutions.com>"
 
-ARG ERDDAP_VERSION=2.21
+ARG ERDDAP_VERSION=2.22
 ARG ERDDAP_CONTENT_URL=https://github.com/BobSimons/erddap/releases/download/v$ERDDAP_VERSION/erddapContent.zip
 ARG ERDDAP_WAR_URL=https://github.com/BobSimons/erddap/releases/download/v$ERDDAP_VERSION/erddap.war
 ENV ERDDAP_bigParentDirectory /erddapData
@@ -116,16 +116,16 @@ ENV ERDDAP_baseHttpsUrl="http://localhost:8080" \
     ERDDAP_emailProperties="" \
     ERDDAP_emailSmtpHost="" \
     ERDDAP_emailSmtpPort="" \
-    ERDDAP_adminInstitution="Axiom Docker Install" \
-    ERDDAP_adminInstitutionUrl="https://github.com/axiom-data-science/docker-erddap" \
-    ERDDAP_adminIndividualName="Axiom Docker Install" \
+    ERDDAP_adminInstitution="EMODnet Physics Docker Install" \
+    ERDDAP_adminInstitutionUrl="https://github.com/EMODnet-Physics/docker-erddap-install" \
+    ERDDAP_adminIndividualName="EMODnet Physics Docker Install" \
     ERDDAP_adminPosition="Software Engineer" \
     ERDDAP_adminPhone="555-555-5555" \
     ERDDAP_adminAddress="123 Irrelevant St." \
     ERDDAP_adminCity="Nowhere" \
-    ERDDAP_adminStateOrProvince="AK" \
-    ERDDAP_adminPostalCode="99504" \
-    ERDDAP_adminCountry="USA" \
+    ERDDAP_adminStateOrProvince="IT" \
+    ERDDAP_adminPostalCode="10000" \
+    ERDDAP_adminCountry="ITA" \
     ERDDAP_adminEmail="nobody@example.com"
 
 COPY ERDDAP/entrypoint.sh /
